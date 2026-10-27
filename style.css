@@ -125,3 +125,25 @@ footer p,footer a{font-size:10px;color:var(--muted);margin:0}
 .paid-split .chart-card{margin-top:0}
 .paid-panels{display:grid;gap:20px}
 @media(max-width:900px){.paid-split{grid-template-columns:1fr}}
+
+/* ---------- Movimento ---------- */
+@property --share{syntax:'<percentage>';inherits:false;initial-value:0%}
+nav a.active{color:var(--cream)}
+@media(prefers-reduced-motion:no-preference){
+ .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s cubic-bezier(.22,.61,.36,1),transform .55s cubic-bezier(.22,.61,.36,1)}
+ .reveal.in{opacity:1;transform:none}
+ .bar-chart rect{transform-box:fill-box;transition:transform .85s cubic-bezier(.22,.61,.36,1)}
+ .bar-chart .bar-h{transform-origin:left center;transform:scaleX(0)}
+ .bar-chart .bar-v{transform-origin:center bottom;transform:scaleY(0)}
+ .chart-card.in .bar-chart .bar-h{transform:scaleX(1)}
+ .chart-card.in .bar-chart .bar-v{transform:scaleY(1)}
+ .bar-chart .chart-value{opacity:0;transition:opacity .45s ease .45s}
+ .chart-card.in .bar-chart .chart-value{opacity:1}
+ .gender-ring{transition:--share 1.15s cubic-bezier(.22,.61,.36,1)}
+ .kpi,.post,.bullet-list li{transition:border-color .3s ease,background .3s ease,transform .3s ease}
+ .kpi:hover,.bullet-list li:hover{border-color:#ffffff3d;background:#ffffff0b}
+ .post:hover{border-color:#ffffff3d;transform:translateY(-3px)}
+ .button{transition:transform .25s ease,box-shadow .25s ease}
+ .button:hover{transform:translateY(-2px);box-shadow:0 10px 28px #e2001a4d}
+ nav a{transition:color .25s ease}
+}

@@ -50,15 +50,70 @@
     {label:'29/set',value:31.34,color:'var(--red)'},{label:'30/set',value:25.64,color:'var(--red)'},
     {label:'1/out',value:0.63,color:'var(--red)'}],
    'Fonte: Growth Pack → bd_ads (paid_meta). Valores em R$. Os 25 dias seguintes do recorte não têm linha de investimento na fonte — não foram convertidos em zero.',2);
-  C.bars('paid-ads-chart','Investimento por anúncio','Os 7 anúncios com veiculação comprovada no período, em ordem decrescente.',
-   [{label:'VID · Custo da Falta',value:74.66,color:'var(--red)'},
-    {label:'VID · Produto na Prática',value:20.28,color:'var(--cream)'},
-    {label:'CAR · Original ou Compatível',value:2.72,color:'var(--cream)'},
-    {label:'CAR · 3 Itens que Esquece',value:1.57,color:'var(--cream)'},
-    {label:'CAR · Repor antes do Q4',value:1.27,color:'var(--cream)'},
-    {label:'VID · Operação Própria',value:0.88,color:'var(--cream)'},
-    {label:'CAR · 5 Sinais do Almoxarifado',value:0.01,color:'var(--cream)'}],
-   'Fonte: Growth Pack → bd_ads. Valores em R$. Um único anúncio concentrou 74% do investimento e 89% dos cliques do teste.',2);
  }
- document.addEventListener('DOMContentLoaded',()=>{renderPosts();renderCharts();});
+
+ /* ---------- Movimento (entrada no scroll, contagem, barras, anel) ---------- */
+ function countUp(node){
+  const raw=node.textContent.trim();
+  const m=raw.match(/^([^\d-]*)(-?[\d.,]+)(.*)$/);
+  if(!m)return;
+  const pre=m[1],numStr=m[2],post=m[3];
+  const dec=(numStr.split(',')[1]||'').length;
+  const target=parseFloat(numStr.replace(/\./g,'').replace(',','.'));
+  if(!isFinite(target))return;
+  const fmt=v=>v.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+  node.style.minWidth=node.getBoundingClientRect().width+'px';
+  const dur=900,t0=performance.now();
+  (function step(now){
+   const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);
+   node.textContent=pre+fmt(target*e)+post;
+   if(p<1)requestAnimationFrame(step); else node.textContent=raw;
+  })(t0);
+ }
+ function onReveal(el){
+  if(el.classList.contains('kpi')){
+   const n=el.querySelector('strong'); if(n)countUp(n);
+  }
+  el.querySelectorAll('.gender-ring[data-share]').forEach(r=>{
+   r.style.setProperty('--share',r.dataset.share);
+  });
+ }
+ function initMotion(){
+  if(!('IntersectionObserver'in window))return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.querySelectorAll('.gender-ring').forEach(r=>{
+   const cur=r.style.getPropertyValue('--share')||'0%';
+   r.dataset.share=cur; r.style.setProperty('--share','0%');
+  });
+  const targets=[...document.querySelectorAll(
+   '.cover>*, .section>.eyebrow, .section>.heading, .kpis>.kpi, .chart-card, '+
+   '.two-col>*, .paid-panels>*, .audience-grid, .callout, .bullet-list>li, .ranked-posts>.post'
+  )];
+  targets.forEach(el=>el.classList.add('reveal'));
+  const io=new IntersectionObserver(es=>{
+   es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target; io.unobserve(el);
+    const sibs=[...el.parentElement.children].filter(n=>n.classList.contains('reveal'));
+    const delay=Math.min(Math.max(0,sibs.indexOf(el))*70,350);
+    setTimeout(()=>{el.classList.add('in');onReveal(el);},delay);
+   });
+  },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  targets.forEach(el=>io.observe(el));
+ }
+ function initNavHighlight(){
+  if(!('IntersectionObserver'in window))return;
+  const links=[...document.querySelectorAll('nav a[href^="#"]')];
+  const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const io=new IntersectionObserver(es=>{
+   es.forEach(e=>{
+    const a=map.get(e.target.id); if(!a)return;
+    if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));a.classList.add('active');}
+   });
+  },{threshold:.45});
+  map.forEach((a,id)=>{const s=document.getElementById(id); if(s)io.observe(s);});
+ }
+ document.addEventListener('DOMContentLoaded',()=>{
+  renderPosts();renderCharts();initMotion();initNavHighlight();
+ });
 })();
