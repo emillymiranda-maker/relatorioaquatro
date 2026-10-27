@@ -1,0 +1,260 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Dashboard Aquatro | Set/Out 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --v4-red:#e50914;--v4-red-hover:#c40712;--v4-orange:#ff481f;--v4-flame:#f0141e;
+  --v4-dark:#280001;--v4-darker:#280000;--v4-grey:#e1dcdc;--v4-white:#fff;
+  --v4-cream:#ffebc8;--v4-salmon:#ffb4a0;--ink:#141414;--ink-soft:#5a5a5a;
+  --line:rgba(20,20,20,.12);--radius:22px;--radius-pill:999px;
+  --hero:radial-gradient(120% 130% at 50% -10%,#ff5a2c 0%,#e50914 30%,#b00610 62%,#280001 100%);
+}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#171313;color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+button{font-family:inherit}
+#viewport{position:fixed;inset:0;overflow:hidden;
+  background:radial-gradient(circle at 50% 10%,rgba(229,9,20,.18),transparent 38%),#171313}
+#deck{--deck-scale:1;position:absolute;left:50%;top:50%;width:1600px;height:900px;overflow:hidden;
+  transform:translate(-50%,-50%) scale(var(--deck-scale));transform-origin:center;
+  background:#f5f4f2;box-shadow:0 40px 120px rgba(0,0,0,.45)}
+.slide{position:absolute;inset:0;width:1600px;height:900px;padding:70px 92px 104px;overflow:hidden;
+  opacity:0;pointer-events:none;transform:translateX(24px);transition:opacity .28s ease,transform .28s ease;
+  background:radial-gradient(circle at 92% 8%,rgba(229,9,20,.055),transparent 24%),#f5f4f2;
+  display:flex;flex-direction:column}
+.slide.active{opacity:1;pointer-events:auto;transform:translateX(0)}
+.slide.red{color:#fff;background:var(--hero)}
+.slide.dark{color:#fff;background:radial-gradient(circle at 78% 15%,rgba(229,9,20,.5),transparent 32%),linear-gradient(145deg,#280001 0%,#130001 100%)}
+.slide.white{background:#fff}
+.topline{position:absolute;top:0;left:0;width:100%;height:5px;
+  background:linear-gradient(90deg,var(--v4-red),var(--v4-orange),transparent 76%)}
+h1,h2,h3,p{margin-top:0}
+h1{margin-bottom:20px;font-size:84px;line-height:.98;letter-spacing:-.055em;font-weight:600}
+h2{margin-bottom:6px;font-size:52px;line-height:1.02;letter-spacing:-.045em;font-weight:600}
+h3{margin-bottom:8px;font-size:24px;line-height:1.1;letter-spacing:-.025em;font-weight:600}
+.lede{max-width:1040px;color:var(--ink-soft);font-size:25px;line-height:1.4;font-weight:300}
+.red .lede,.dark .lede{color:rgba(255,255,255,.75)}
+.accent{color:var(--v4-red)}.red .accent,.dark .accent{color:var(--v4-cream)}
+.mono{font-family:"IBM Plex Mono",monospace}
+.eyebrow{display:inline-flex;align-items:center;min-height:32px;padding:6px 14px;
+  border:1px solid rgba(229,9,20,.18);border-radius:var(--radius-pill);color:var(--v4-red);
+  background:rgba(229,9,20,.07);font-size:12px;line-height:1;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.red .eyebrow,.dark .eyebrow{color:rgba(255,255,255,.92);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35)}
+.slide-head{flex:0 0 auto}
+.slide-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:26px;min-height:0}
+.card{position:relative;padding:26px;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+.dark .card,.red .card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:#fff}
+.icon{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+.icon-box{width:54px;height:54px;display:grid;place-items:center;flex:0 0 auto;border:1px solid rgba(229,9,20,.18);
+  border-radius:16px;color:var(--v4-red);background:rgba(229,9,20,.07)}
+.red .icon-box,.dark .icon-box{color:#fff;border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.08)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.kpi{display:flex;flex-direction:column;justify-content:center;gap:6px;min-height:150px}
+.kpi .k-top{display:flex;align-items:center;gap:12px}
+.kpi .big-number{color:var(--v4-red);font-size:42px;line-height:1;letter-spacing:-.04em;font-weight:700;white-space:nowrap}
+.dark .kpi .big-number,.red .kpi .big-number{color:#fff}
+.kpi .metric-label{color:var(--ink-soft);font-size:17px;line-height:1.25}
+.dark .kpi .metric-label,.red .kpi .metric-label{color:rgba(255,255,255,.7)}
+.delta{display:inline-flex;align-items:center;gap:5px;font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:500;
+  padding:3px 9px;border-radius:var(--radius-pill)}
+.delta.up{color:#0a7d3c;background:rgba(10,125,60,.10)}
+.delta.down{color:#b42318;background:rgba(180,35,24,.09)}
+.delta.flat{color:#7a5b00;background:rgba(180,130,0,.10)}
+.delta.new{color:var(--v4-red);background:rgba(229,9,20,.09)}
+.dark .delta.up,.red .delta.up{color:#7ff0b0;background:rgba(120,240,160,.14)}
+.dark .delta.down,.red .delta.down{color:#ffb4a0;background:rgba(255,120,90,.16)}
+.dark .delta.new,.red .delta.new{color:var(--v4-cream);background:rgba(255,255,255,.12)}
+.bars{display:flex;flex-direction:column;gap:14px}
+.bar-row{display:grid;grid-template-columns:150px 1fr 96px;align-items:center;gap:14px}
+.bar-row .b-lab{font-size:17px;font-weight:500}
+.bar-row .b-track{height:22px;border-radius:var(--radius-pill);background:rgba(20,20,20,.07);overflow:hidden}
+.dark .bar-row .b-track,.red .bar-row .b-track{background:rgba(255,255,255,.12)}
+.bar-row .b-fill{height:100%;border-radius:var(--radius-pill);background:var(--v4-red)}
+.bar-row .b-fill.hi{background:linear-gradient(90deg,var(--v4-red),var(--v4-orange))}
+.bar-row .b-val{text-align:right;font-family:"IBM Plex Mono",monospace;font-size:17px;font-weight:500}
+.rank{display:flex;flex-direction:column;gap:12px}
+.rank-item{display:flex;align-items:center;gap:18px;padding:16px 20px;border-radius:16px;
+  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
+.rank-item .r-pos{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:600;color:var(--v4-cream);width:34px;flex:0 0 auto}
+.rank-item .r-title{flex:1;font-size:19px;font-weight:500;line-height:1.2}
+.rank-item .r-meta{display:flex;gap:18px;flex:0 0 auto}
+.rank-item .r-meta .m{display:flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;font-size:16px;color:rgba(255,255,255,.85);white-space:nowrap}
+.rank-item .r-meta{align-items:center}
+.tag{display:inline-flex;align-items:center;gap:7px;padding:6px 13px;border-radius:var(--radius-pill);
+  font-size:14px;font-weight:600;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);white-space:nowrap}
+.bullet-list{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.bullet-list li{display:flex;align-items:flex-start;gap:16px;padding:16px 20px;border:1px solid var(--line);
+  border-radius:16px;background:#fff;font-size:19px;line-height:1.3}
+.bullet-list li .icon-box{width:46px;height:46px;border-radius:13px}
+.bullet-list li b{font-weight:600}
+.demo-bars{display:flex;align-items:flex-end;gap:20px;height:230px;padding:0 10px}
+.demo-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;height:100%;justify-content:flex-end}
+.demo-col .pair{display:flex;align-items:flex-end;gap:6px;width:100%;justify-content:center;flex:1}
+.demo-col .db{width:30px;border-radius:7px 7px 0 0}
+.demo-col .db.f{background:linear-gradient(180deg,#ff8a5c,var(--v4-red))}
+.demo-col .db.m{background:rgba(20,20,20,.22)}
+.demo-col .db-lab{font-family:"IBM Plex Mono",monospace;font-size:15px;color:var(--ink-soft)}
+.legend{display:flex;gap:22px;align-items:center;font-size:16px;color:var(--ink-soft)}
+.legend .dot{width:14px;height:14px;border-radius:4px;display:inline-block;margin-right:7px;vertical-align:-2px}
+.foot-note{font-size:16px;color:var(--ink-soft);line-height:1.35}
+.dark .foot-note,.red .foot-note{color:rgba(255,255,255,.62)}
+.cover-content{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+.brand-lockup img{width:300px;display:block;object-fit:contain}
+.cover-title{max-width:1180px;margin:24px 0 0;font-size:88px}
+.sphere{position:absolute;border:1px solid rgba(255,255,255,.24);border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.38),rgba(255,255,255,.045) 48%,transparent 66%)}
+.slide-footer{position:absolute;z-index:8;left:92px;right:92px;bottom:30px;height:44px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.slide-footer img{width:150px;height:44px;object-fit:contain;object-position:left center}
+.slide-footer .f-cli{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--ink-soft);letter-spacing:.02em}
+.dark .slide-footer .f-cli,.red .slide-footer .f-cli{color:rgba(255,255,255,.6)}
+
+.navigation{position:absolute;z-index:20;right:50px;bottom:24px;display:flex;gap:10px}
+.nav-btn{width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(20,20,20,.12);border-radius:50%;
+  color:var(--ink);background:rgba(255,255,255,.92);box-shadow:0 10px 30px rgba(0,0,0,.12);cursor:pointer;transition:all .15s ease}
+.nav-btn:hover{transform:translateY(-2px);background:#fff}
+.nav-btn:disabled{opacity:.3;cursor:default;transform:none}
+.progress-track{position:absolute;z-index:21;left:0;right:0;bottom:0;height:7px;background:rgba(20,20,20,.1)}
+.progress-fill{width:14%;height:100%;background:linear-gradient(90deg,var(--v4-red),var(--v4-orange))}
+.slide-counter{position:absolute;z-index:22;right:168px;bottom:37px;color:rgba(20,20,20,.52);
+  font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:.04em}
+</style></head><body>
+<svg aria-hidden="true" width="0" height="0" style="position:absolute">
+<symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><circle cx="18" cy="9" r="3"/><path d="M2 21c0-5 3-8 7-8s7 3 7 8M16 14c4 0 6 2 6 7"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5-10-11a5 5 0 0 1 10-2 5 5 0 0 1 10 2c-2 6-10 11-10 11Z"/></symbol>
+<symbol id="i-click" viewBox="0 0 24 24"><path d="M9 4v2M4 9h2M6.3 6.3l1.4 1.4"/><path d="M11 11l9 4-4 1.5L14.5 20 11 11Z"/></symbol>
+<symbol id="i-reel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m10 8 5 4-5 4V8Z"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19V3"/><path d="M2 19h21"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-9"/><path d="M16 6h5v5"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5 8.6 10.5"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.9 5.9 6.1.9-4.4 4.3 1 6.1L12 17.8 6.4 20.3l1-6.1L3 9.8l6.1-.9L12 3Z"/></symbol>
+<symbol id="i-fb" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8a1 1 0 0 1 1-1Z"/></symbol>
+<symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+<symbol id="i-comment" viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></symbol>
+</svg>
+<div id="viewport"><main id="deck" aria-live="polite"><section class="slide red" data-title="Aquatro — Relatório de Performance"><div class="sphere" style="width:430px;height:430px;right:-80px;top:-120px;opacity:.5"></div>
+      <div class="sphere" style="width:240px;height:240px;right:290px;top:120px;opacity:.3"></div>
+      <div class="cover-content">
+        <div class="brand-lockup"><img src="assets/colli-white.png" alt="Colli&amp;Co"></div>
+        <div><span class="eyebrow">Relatório de Performance</span>
+          <h1 class="cover-title">Aquatro<br>Set/Out 2026</h1>
+          <p class="lede">Desempenho de Instagram e Facebook — @aquatrosuprimentoscm, Campo Mourão/PR e região.<br>Período: 27 de setembro a 26 de outubro de 2026.</p></div>
+      </div></section><section class="slide " data-title="Destaques do período"><div class="slide-head"><span class="eyebrow">Visão geral do período</span>
+      <h2>Instagram cresceu <span class="accent">+68,9% em views</span>, 100% orgânico</h2>
+      <p class="lede">Nos últimos 30 dias (27/set a 26/out), o perfil ganhou tração sem nenhum real investido em anúncio — todo o resultado veio de conteúdo orgânico.</p></div>
+      <div class="slide-body"><div class="grid-4"><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="big-number">236,0 mil</div></div>
+      <div class="metric-label">Visualizações no Instagram</div><div><span class="delta up">&#9650; vs. 30 dias anteriores</span></div></div><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+      <div class="big-number">122,9 mil</div></div>
+      <div class="metric-label">Alcance no Instagram</div><div><span class="delta up">&#9650; +50,7%</span></div></div><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><circle cx="18" cy="9" r="3"/><path d="M2 21c0-5 3-8 7-8s7 3 7 8M16 14c4 0 6 2 6 7"/></svg></div>
+      <div class="big-number">+113</div></div>
+      <div class="metric-label">Novos seguidores no Instagram</div><div><span class="delta up">&#9650; +43,5%</span></div></div><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z"/></svg></div>
+      <div class="big-number">100%</div></div>
+      <div class="metric-label">Orgânico — sem verba de anúncio</div><div><span class="delta new">&#9670; nenhuma conta de anúncios ativa</span></div></div></div><p class="foot-note" style="margin-top:22px">Comparação automática da própria plataforma vs. os 30 dias anteriores. Sem conta de anúncios vinculada no Business Manager da Aquatro — todo o crescimento é orgânico.</p></div><div class="slide-footer"><img class="flogo" src="assets/colli-red.png" alt="Colli&amp;Co">
+      <span class="f-cli">AQUATRO &nbsp;/&nbsp; SET-OUT 2026</span></div></section><section class="slide white" data-title="Instagram em detalhe"><div class="slide-head"><span class="eyebrow"><svg class="icon" style="width:15px;height:15px;stroke:currentColor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>&nbsp;Instagram</span>
+      <h2>Instagram: <span class="accent">236,0 mil</span> visualizações</h2></div>
+      <div class="slide-body"><div class="grid-4" style="margin-bottom:26px"><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="big-number">236,0 mil</div></div>
+      <div class="metric-label">Visualizações</div><div><span class="delta up">&#9650; +68,9%</span></div></div><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+      <div class="big-number">122,9 mil</div></div>
+      <div class="metric-label">Alcance</div><div><span class="delta up">&#9650; +50,7%</span></div></div><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v2M4 9h2M6.3 6.3l1.4 1.4"/><path d="M11 11l9 4-4 1.5L14.5 20 11 11Z"/></svg></div>
+      <div class="big-number">2,8 mil</div></div>
+      <div class="metric-label">Cliques no link</div><div><span class="delta up">&#9650; +50,8%</span></div></div><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+      <div class="big-number">4,1 mil</div></div>
+      <div class="metric-label">Visitas ao perfil</div><div><span class="delta up">&#9650; +15,9%</span></div></div></div><div class="grid-2" style="gap:26px"><div class="card">
+      <h3>De onde vieram as visualizações</h3><div class="bars" style="margin-top:16px"><div class="bar-row"><div class="b-lab">Orgânico</div>
+      <div class="b-track"><div class="b-fill hi" style="width:100%"></div></div>
+      <div class="b-val">236,0 mil</div></div></div><p class="foot-note" style="margin-top:16px">Não há conta de anúncios vinculada à Aquatro no Business Manager — 100% do resultado é orgânico, sem patrocínio.</p></div>
+      <div class="card"><h3>Formato publicado no feed (27/set–26/out)</h3><div class="bars" style="margin-top:16px"><div class="bar-row"><div class="b-lab">Fotos</div>
+      <div class="b-track"><div class="b-fill" style="width:3%"></div></div>
+      <div class="b-val">3 posts</div></div><div class="bar-row"><div class="b-lab">Carrosséis</div>
+      <div class="b-track"><div class="b-fill" style="width:2%"></div></div>
+      <div class="b-val">2 posts</div></div><div class="bar-row"><div class="b-lab">Reels</div>
+      <div class="b-track"><div class="b-fill" style="width:2%"></div></div>
+      <div class="b-val">2 posts</div></div></div><p class="foot-note" style="margin-top:16px">7 publicações no feed no período, além de Stories ao longo do mês. Cadência alinhada ao volume mensal combinado com a Aquatro (8–10 criativos/mês).</p></div></div></div><div class="slide-footer"><img class="flogo" src="assets/colli-red.png" alt="Colli&amp;Co">
+      <span class="f-cli">AQUATRO &nbsp;/&nbsp; SET-OUT 2026</span></div></section><section class="slide " data-title="Facebook em detalhe"><div class="slide-head"><span class="eyebrow"><svg class="icon" style="width:15px;height:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8a1 1 0 0 1 1-1Z"/></svg>&nbsp;Facebook</span>
+      <h2>Facebook: canal secundário em crescimento</h2></div>
+      <div class="slide-body"><div class="grid-4" style="margin-bottom:26px"><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="big-number">3,5 mil</div></div>
+      <div class="metric-label">Visualizações</div><div><span class="delta up">&#9650; +87%</span></div></div><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><circle cx="18" cy="9" r="3"/><path d="M2 21c0-5 3-8 7-8s7 3 7 8M16 14c4 0 6 2 6 7"/></svg></div>
+      <div class="big-number">2,1 mil</div></div>
+      <div class="metric-label">Visualizadores</div><div><span class="delta up">&#9650; +80,3%</span></div></div><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v2M4 9h2M6.3 6.3l1.4 1.4"/><path d="M11 11l9 4-4 1.5L14.5 20 11 11Z"/></svg></div>
+      <div class="big-number">14</div></div>
+      <div class="metric-label">Cliques no link</div><div><span class="delta up">&#9650; +89%</span></div></div><div class="card kpi"><div class="k-top"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+      <div class="big-number">17</div></div>
+      <div class="metric-label">Visitas à Página</div><div><span class="delta up">&#9650; +86,4%</span></div></div></div><div class="card"><div style="display:flex;align-items:flex-start;gap:16px">
+      <div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></div>
+      <div><h3>Canal pequeno, mas em alta — e 100% cross-post do Instagram</h3>
+      <p class="foot-note" style="font-size:18px">A Página tem hoje <b>25 seguidores</b> e todo o conteúdo publicado é o mesmo material do Instagram, replicado automaticamente (sem produção nativa pro Facebook). Mesmo assim, todas as métricas do canal cresceram no período — visualizações, visitantes, cliques e visitas à Página subiram entre 80% e 90%. Como a base ainda é pequena, os números absolutos são baixos; o sinal importante é a direção, que é positiva em tudo.</p></div></div></div></div><div class="slide-footer"><img class="flogo" src="assets/colli-red.png" alt="Colli&amp;Co">
+      <span class="f-cli">AQUATRO &nbsp;/&nbsp; SET-OUT 2026</span></div></section><section class="slide dark" data-title="Conteúdo destaque"><div class="slide-head"><span class="eyebrow">Conteúdo campeão</span>
+      <h2>Atendimento rápido e educação sobre compras lideram</h2></div>
+      <div class="slide-body"><div class="rank"><div class="rank-item"><div class="r-pos">01</div><div class="r-title">"Sabe o fornecedor que só responde no dia seguinte…" — atendimento ágil</div>
+      <div class="r-meta"><span class="tag"><svg class="icon" style="width:15px;height:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>Foto · 28/set</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>415</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>314</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5-10-11a5 5 0 0 1 10-2 5 5 0 0 1 10 2c-2 6-10 11-10 11Z"/></svg>2</span></div></div><div class="rank-item"><div class="r-pos">02</div><div class="r-title">"Um dia sem imprevistos de material" — eficiência operacional</div>
+      <div class="r-meta"><span class="tag"><svg class="icon" style="width:15px;height:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m10 8 5 4-5 4V8Z"/></svg>Reel · 21/out</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>286</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>163</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5-10-11a5 5 0 0 1 10-2 5 5 0 0 1 10 2c-2 6-10 11-10 11Z"/></svg>7</span></div></div><div class="rank-item"><div class="r-pos">03</div><div class="r-title">"Ainda acha que a Aquatro é só a empresa do toner?" — catálogo completo</div>
+      <div class="r-meta"><span class="tag"><svg class="icon" style="width:15px;height:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.9 5.9 6.1.9-4.4 4.3 1 6.1L12 17.8 6.4 20.3l1-6.1L3 9.8l6.1-.9L12 3Z"/></svg>Carrossel · 12/out</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>224</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>49</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>2</span></div></div><div class="rank-item"><div class="r-pos">04</div><div class="r-title">Homenagem ao Dia da Secretária</div>
+      <div class="r-meta"><span class="tag"><svg class="icon" style="width:15px;height:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>Foto · 30/set</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>217</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>151</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5-10-11a5 5 0 0 1 10-2 5 5 0 0 1 10 2c-2 6-10 11-10 11Z"/></svg>4</span></div></div><div class="rank-item"><div class="r-pos">05</div><div class="r-title">Checklist de orçamento 2027 — 3 perguntas sobre estoque</div>
+      <div class="r-meta"><span class="tag"><svg class="icon" style="width:15px;height:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.9 5.9 6.1.9-4.4 4.3 1 6.1L12 17.8 6.4 20.3l1-6.1L3 9.8l6.1-.9L12 3Z"/></svg>Carrossel · 7/out</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>213</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>49</span><span class="m"><svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>2</span></div></div></div><p class="foot-note" style="margin-top:22px">Leitura: o post de maior alcance (415 views) fala direto da dor de atendimento lento — exatamente o diferencial da Aquatro. Carrosséis educativos (catálogo completo, checklist de orçamento) também performam bem e geram comentário, sinal de atenção real do público B2B.</p></div><div class="slide-footer"><img class="flogo" src="assets/colli-red.png" alt="Colli&amp;Co">
+      <span class="f-cli">AQUATRO &nbsp;/&nbsp; SET-OUT 2026</span></div></section><section class="slide white" data-title="Público"><div class="slide-head"><span class="eyebrow">Público no Instagram</span>
+      <h2>1.350 seguidores — <span class="accent">8 em cada 10 são mulheres</span></h2></div>
+      <div class="slide-body"><div class="grid-2" style="gap:30px;align-items:stretch">
+      <div class="card"><h3>Faixa etária e gênero</h3>
+        <div class="demo-bars" style="margin-top:18px"><div class="demo-col"><div class="pair">
+      <div class="db f" style="height:33px"></div><div class="db m" style="height:6px"></div></div>
+      <div class="db-lab">18-24</div></div><div class="demo-col"><div class="pair">
+      <div class="db f" style="height:162px"></div><div class="db m" style="height:36px"></div></div>
+      <div class="db-lab">25-34</div></div><div class="demo-col"><div class="pair">
+      <div class="db f" style="height:174px"></div><div class="db m" style="height:42px"></div></div>
+      <div class="db-lab">35-44</div></div><div class="demo-col"><div class="pair">
+      <div class="db f" style="height:78px"></div><div class="db m" style="height:24px"></div></div>
+      <div class="db-lab">45-54</div></div><div class="demo-col"><div class="pair">
+      <div class="db f" style="height:18px"></div><div class="db m" style="height:6px"></div></div>
+      <div class="db-lab">55-64</div></div><div class="demo-col"><div class="pair">
+      <div class="db f" style="height:6px"></div><div class="db m" style="height:2px"></div></div>
+      <div class="db-lab">65+</div></div></div><div class="legend" style="margin-top:16px"><span><span class="dot" style="background:linear-gradient(180deg,#ff8a5c,#e50914)"></span>Mulheres 80,8%</span><span><span class="dot" style="background:rgba(20,20,20,.22)"></span>Homens 19,2%</span></div></div>
+      <div class="card"><h3>Principais cidades</h3><div class="bars" style="margin-top:18px"><div class="bar-row"><div class="b-lab">Campo Mourão/PR</div>
+      <div class="b-track"><div class="b-fill hi" style="width:100%"></div></div>
+      <div class="b-val">69,5%</div></div><div class="bar-row"><div class="b-lab">Araruna/PR</div>
+      <div class="b-track"><div class="b-fill" style="width:3%"></div></div>
+      <div class="b-val">2,4%</div></div><div class="bar-row"><div class="b-lab">Maringá/PR</div>
+      <div class="b-track"><div class="b-fill" style="width:2%"></div></div>
+      <div class="b-val">1,7%</div></div><div class="bar-row"><div class="b-lab">Peabiru/PR</div>
+      <div class="b-track"><div class="b-fill" style="width:2%"></div></div>
+      <div class="b-val">1,3%</div></div></div><p class="foot-note" style="margin-top:16px">98,7% do público está no Brasil. Perfil confirma o achado de jul/2026: a maioria é feminina, 25–44 anos — não o corporativo masculino padrão esperado para um negócio B2B.</p><p class="foot-note" style="margin-top:8px">Facebook: 25 seguidores — abaixo do mínimo de 100 que a Meta exige para liberar dados demográficos da Página.</p></div></div></div><div class="slide-footer"><img class="flogo" src="assets/colli-red.png" alt="Colli&amp;Co">
+      <span class="f-cli">AQUATRO &nbsp;/&nbsp; SET-OUT 2026</span></div></section><section class="slide " data-title="Leitura e próximos passos"><div class="slide-head"><span class="eyebrow">Leitura estratégica</span>
+      <h2>O que o período mostrou e para onde ir</h2></div>
+      <div class="slide-body"><ul class="bullet-list"><li><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z"/></svg></div><div><b>Crescimento 100% orgânico.</b> +68,9% em views e +43,5% em seguidores sem nenhum real de anúncio — base sólida para avaliar um primeiro teste de mídia paga nos formatos que já performam.</div></li><li><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div><div><b>Dor de atendimento lento é o gancho mais forte.</b> O post sobre fornecedor que demora a responder foi o de maior alcance do período — vale repetir essa linha de "eficiência operacional" nas próximas pautas.</div></li><li><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.9 5.9 6.1.9-4.4 4.3 1 6.1L12 17.8 6.4 20.3l1-6.1L3 9.8l6.1-.9L12 3Z"/></svg></div><div><b>Carrossel educativo engaja e gera comentário.</b> "Catálogo completo" e "checklist de orçamento 2027" tiveram comentários reais — sinal de interesse qualificado do público B2B, vale manter esse formato.</div></li><li><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><b>Público segue 80,8% feminino, 25–44 anos, em Campo Mourão.</b> Confirma o padrão identificado em jul/2026 — manter tom mais leve sem perder o B2B, como já alinhado.</div></li><li><div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8a1 1 0 0 1 1-1Z"/></svg></div><div><b>Facebook ainda pequeno (25 seguidores) e 100% cross-post.</b> Métricas cresceram em tudo, mas a base é baixa — manter como canal secundário por ora, sem produção nativa dedicada.</div></li></ul></div><div class="slide-footer"><img class="flogo" src="assets/colli-red.png" alt="Colli&amp;Co">
+      <span class="f-cli">AQUATRO &nbsp;/&nbsp; SET-OUT 2026</span></div></section><div class="slide-counter" id="slideCounter">01 / 07</div>
+  <nav class="navigation"><button class="nav-btn" id="prevBtn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg></button>
+  <button class="nav-btn" id="nextBtn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></nav>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </main></div><script>
+const deck=document.getElementById("deck");
+const prevBtn=document.getElementById("prevBtn"),nextBtn=document.getElementById("nextBtn");
+const progressFill=document.getElementById("progressFill"),slideCounter=document.getElementById("slideCounter");
+let current=0;const slides=Array.from(document.querySelectorAll('.slide'));
+function fitDeck(){const vw=window.visualViewport?.width||document.documentElement.clientWidth||window.innerWidth;
+  const vh=window.visualViewport?.height||document.documentElement.clientHeight||window.innerHeight;
+  const scale=Math.max(.1,Math.min((vw-16)/1600,(vh-16)/900,1));deck.style.setProperty("--deck-scale",scale);}
+function goTo(i){current=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,k)=>s.classList.toggle("active",k===current));
+  const n=String(current+1).padStart(2,"0"),t=String(slides.length).padStart(2,"0");
+  const a=slides[current],dark=a.classList.contains("red")||a.classList.contains("dark");
+  slideCounter.textContent=n+" / "+t;slideCounter.style.color=dark?"rgba(255,255,255,.58)":"rgba(20,20,20,.52)";
+  progressFill.style.width=((current+1)/slides.length*100)+"%";
+  prevBtn.disabled=current===0;nextBtn.disabled=current===slides.length-1;
+  document.querySelectorAll('.flogo').forEach(l=>l.src=dark?"assets/colli-white.png":"assets/colli-red.png");}
+prevBtn.addEventListener("click",()=>goTo(current-1));nextBtn.addEventListener("click",()=>goTo(current+1));
+window.addEventListener("resize",fitDeck);window.visualViewport?.addEventListener("resize",fitDeck);
+window.addEventListener("keydown",e=>{if(["ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();goTo(current+1);}
+  if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();goTo(current-1);}});
+fitDeck();goTo(0);
+</script></body></html>
