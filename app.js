@@ -2,17 +2,17 @@
 (()=>{
  const $=s=>document.querySelector(s);
  const posts=[
-  {pos:1,title:'"Sabe o fornecedor que só responde no dia seguinte?" — atendimento ágil',format:'Foto',date:'28/set',views:415,reach:314,likes:2,comments:0,img:null,url:null},
+  {pos:1,title:'"Sabe o fornecedor que só responde no dia seguinte?" — atendimento ágil',format:'Foto',date:'28/set',views:415,reach:314,likes:2,comments:0,img:'assets/posts/post-atendimento.jpg',url:'https://www.instagram.com/aquatrosuprimentoscm/'},
   {pos:2,title:'"Um dia sem imprevistos de material" — eficiência operacional',format:'Reel',date:'21/out',views:286,reach:163,likes:7,comments:0,img:'assets/posts/post-eficiencia.jpg',url:'https://www.instagram.com/aquatrosuprimentoscm/reel/Dewg26oERzi/'},
   {pos:3,title:'"Ainda acha que a Aquatro é só a empresa do toner?" — catálogo completo',format:'Carrossel',date:'12/out',views:224,reach:49,likes:0,comments:2,img:'assets/posts/post-catalogo.jpg',url:'https://www.instagram.com/aquatrosuprimentoscm/p/DeZSrjziIEB/'},
-  {pos:4,title:'Homenagem ao Dia da Secretária',format:'Foto',date:'30/set',views:217,reach:151,likes:4,comments:0,img:null,url:null},
+  {pos:4,title:'Homenagem ao Dia da Secretária',format:'Foto',date:'30/set',views:217,reach:151,likes:4,comments:0,img:'assets/posts/post-secretaria.jpg',url:'https://www.instagram.com/aquatrosuprimentoscm/'},
   {pos:5,title:'Checklist de orçamento 2027 — 3 perguntas sobre estoque',format:'Carrossel',date:'7/out',views:213,reach:49,likes:0,comments:2,img:'assets/posts/post-checklist.jpg',url:'https://www.instagram.com/aquatrosuprimentoscm/'},
  ];
  function renderPosts(){
   const target=$('#ranked-posts');if(!target)return;
   target.innerHTML=posts.map(p=>`<article class="post">
    <div class="post-media">
-    ${p.img?`<a href="${p.url}" target="_blank" rel="noopener"><img src="${p.img}" alt="Capa da publicação: ${p.title}" loading="lazy"></a>`:
+    ${p.img?`<a href="${p.url}" target="_blank" rel="noopener"><img class="ranked-post-image" src="${p.img}" alt="Capa da publicação: ${p.title}" loading="lazy"></a>`:
       `<div class="post-image-pending">Imagem em alta qualidade pendente — aguardando pauta/BM</div>`}
     <div class="media-caption">${p.format} · ${p.date}</div>
    </div>
