@@ -6,7 +6,7 @@
   {pos:2,title:'"Um dia sem imprevistos de material" — eficiência operacional',format:'Reel',date:'21/out',views:286,reach:163,likes:7,comments:0,img:'assets/posts/post-eficiencia.jpg',url:'https://www.instagram.com/aquatrosuprimentoscm/reel/Dewg26oERzi/'},
   {pos:3,title:'"Ainda acha que a Aquatro é só a empresa do toner?" — catálogo completo',format:'Carrossel',date:'12/out',views:224,reach:49,likes:0,comments:2,img:'assets/posts/post-catalogo.jpg',url:'https://www.instagram.com/aquatrosuprimentoscm/p/DeZSrjziIEB/'},
   {pos:4,title:'Homenagem ao Dia da Secretária',format:'Foto',date:'30/set',views:217,reach:151,likes:4,comments:0,img:null,url:null},
-  {pos:5,title:'Checklist de orçamento 2027 — 3 perguntas sobre estoque',format:'Carrossel',date:'7/out',views:213,reach:49,likes:0,comments:2,img:null,url:null},
+  {pos:5,title:'Checklist de orçamento 2027 — 3 perguntas sobre estoque',format:'Carrossel',date:'7/out',views:213,reach:49,likes:0,comments:2,img:'assets/posts/post-checklist.jpg',url:'https://www.instagram.com/aquatrosuprimentoscm/'},
  ];
  function renderPosts(){
   const target=$('#ranked-posts');if(!target)return;
@@ -25,8 +25,8 @@
      <div><strong>${p.likes||p.comments}</strong><span>${p.likes?'Curtidas':'Comentários'}</span></div>
     </div>
     <div class="engagement">${p.comments} comentário(s) · ${p.likes} curtida(s)</div>
-    ${p.url?`<a class="download" href="${p.url}" target="_blank" rel="noopener">Ver publicação no Instagram ↗</a>`
-          :`<a class="download" href="https://www.instagram.com/aquatrosuprimentoscm/" target="_blank" rel="noopener">Ver perfil no Instagram ↗</a>`}
+    ${p.url&&/\/(p|reel)\//.test(p.url)?`<a class="download" href="${p.url}" target="_blank" rel="noopener">Ver publicação no Instagram ↗</a>`
+          :`<a class="download" href="${p.url||'https://www.instagram.com/aquatrosuprimentoscm/'}" target="_blank" rel="noopener">Ver perfil no Instagram ↗</a>`}
    </div>
   </article>`).join('');
  }
