@@ -19,7 +19,7 @@ nav a{font-size:12px;text-decoration:none;color:var(--muted);letter-spacing:.4px
 nav a:hover{color:var(--cream)}
 .edition{font:11px Barlow,monospace;letter-spacing:1px;color:var(--muted)}
 main{overflow-x:hidden}
-.cover{position:relative;padding:60px 6% 44px;min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(ellipse at 70% -10%,#8a0010,transparent 60%),#1d0300;overflow:hidden}
+.cover{position:relative;padding:54px 6% 48px;min-height:calc(100vh - 64px);display:flex;flex-direction:column;justify-content:center;background:radial-gradient(ellipse at 70% -10%,#8a0010,transparent 60%),#1d0300;overflow:hidden}
 .cover .ribbon{display:inline-block;border:1px solid #ffffff55;border-radius:50px;background:#ffffff11;padding:8px 18px;font-size:11px;letter-spacing:2px;margin-bottom:26px}
 .cover h1{font-size:clamp(44px,7vw,92px);line-height:.98;max-width:1100px}
 .cover h1 span{display:block;font-size:.5em;color:var(--cream);margin-top:14px;font-weight:400;letter-spacing:-.5px}
