@@ -45,11 +45,6 @@
    [{age:'18-24',f:5.5,m:1},{age:'25-34',f:27,m:6},{age:'35-44',f:29,m:7},{age:'45-54',f:13,m:4},{age:'55-64',f:3,m:1},{age:'65+',f:1,m:0.3}],
    'Fonte: Meta Business Suite → Público → Instagram. Mulheres de 25 a 44 anos somam mais da metade da base.');
   C.gender('gender-ring',19.2,80.8,1350,'Fonte: Meta Business Suite → Público.');
-  C.bars('paid-daily-chart','Investimento por dia','Único período com veiculação paga registrada dentro do recorte de 27/set a 26/out.',
-   [{label:'27/set',value:31.95,color:'var(--red)'},{label:'28/set',value:11.83,color:'var(--red)'},
-    {label:'29/set',value:31.34,color:'var(--red)'},{label:'30/set',value:25.64,color:'var(--red)'},
-    {label:'1/out',value:0.63,color:'var(--red)'}],
-   'Fonte: Growth Pack → bd_ads (paid_meta). Valores em R$. Os 25 dias seguintes do recorte não têm linha de investimento na fonte — não foram convertidos em zero.',2);
  }
 
  /* ---------- Movimento (entrada no scroll, contagem, barras, anel) ---------- */
@@ -87,7 +82,7 @@
   });
   const targets=[...document.querySelectorAll(
    '.cover>*, .section>.eyebrow, .section>.heading, .kpis>.kpi, .chart-card, '+
-   '.two-col>*, .paid-panels>*, .audience-grid, .callout, .bullet-list>li, .ranked-posts>.post'
+   '.two-col>*, .audience-grid, .callout, .bullet-list>li, .ranked-posts>.post'
   )];
   targets.forEach(el=>el.classList.add('reveal'));
   const io=new IntersectionObserver(es=>{

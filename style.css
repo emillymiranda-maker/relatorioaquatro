@@ -121,10 +121,6 @@ footer p,footer a{font-size:10px;color:var(--muted);margin:0}
  .cover h1{font-size:44px}
  .section{padding:50px 6%}
 }
-.paid-split{grid-template-columns:1.25fr 1fr;align-items:start}
-.paid-split .chart-card{margin-top:0}
-.paid-panels{display:grid;gap:20px}
-@media(max-width:900px){.paid-split{grid-template-columns:1fr}}
 
 /* ---------- Movimento ---------- */
 @property --share{syntax:'<percentage>';inherits:false;initial-value:0%}
