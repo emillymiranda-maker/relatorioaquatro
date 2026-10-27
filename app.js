@@ -25,7 +25,8 @@
      <div><strong>${p.likes||p.comments}</strong><span>${p.likes?'Curtidas':'Comentários'}</span></div>
     </div>
     <div class="engagement">${p.comments} comentário(s) · ${p.likes} curtida(s)</div>
-    <a class="download" href="${p.url}" target="_blank" rel="noopener">Ver publicação no Instagram ↗</a>
+    ${p.url&&/\/(p|reel)\//.test(p.url)?`<a class="download" href="${p.url}" target="_blank" rel="noopener">Ver publicação no Instagram ↗</a>`
+          :`<a class="download" href="${p.url||'https://www.instagram.com/aquatrosuprimentoscm/'}" target="_blank" rel="noopener">Ver perfil no Instagram ↗</a>`}
    </div>
   </article>`).join('');
  }
@@ -44,6 +45,20 @@
    [{age:'18-24',f:5.5,m:1},{age:'25-34',f:27,m:6},{age:'35-44',f:29,m:7},{age:'45-54',f:13,m:4},{age:'55-64',f:3,m:1},{age:'65+',f:1,m:0.3}],
    'Fonte: Meta Business Suite → Público → Instagram. Mulheres de 25 a 44 anos somam mais da metade da base.');
   C.gender('gender-ring',19.2,80.8,1350,'Fonte: Meta Business Suite → Público.');
+  C.bars('paid-daily-chart','Investimento por dia','Único período com veiculação paga registrada dentro do recorte de 27/set a 26/out.',
+   [{label:'27/set',value:31.95,color:'var(--red)'},{label:'28/set',value:11.83,color:'var(--red)'},
+    {label:'29/set',value:31.34,color:'var(--red)'},{label:'30/set',value:25.64,color:'var(--red)'},
+    {label:'1/out',value:0.63,color:'var(--red)'}],
+   'Fonte: Growth Pack → bd_ads (paid_meta). Valores em R$. Os 25 dias seguintes do recorte não têm linha de investimento na fonte — não foram convertidos em zero.',2);
+  C.bars('paid-ads-chart','Investimento por anúncio','Os 7 anúncios com veiculação comprovada no período, em ordem decrescente.',
+   [{label:'VID · Custo da Falta',value:74.66,color:'var(--red)'},
+    {label:'VID · Produto na Prática',value:20.28,color:'var(--cream)'},
+    {label:'CAR · Original ou Compatível',value:2.72,color:'var(--cream)'},
+    {label:'CAR · 3 Itens que Esquece',value:1.57,color:'var(--cream)'},
+    {label:'CAR · Repor antes do Q4',value:1.27,color:'var(--cream)'},
+    {label:'VID · Operação Própria',value:0.88,color:'var(--cream)'},
+    {label:'CAR · 5 Sinais do Almoxarifado',value:0.01,color:'var(--cream)'}],
+   'Fonte: Growth Pack → bd_ads. Valores em R$. Um único anúncio concentrou 74% do investimento e 89% dos cliques do teste.',2);
  }
  document.addEventListener('DOMContentLoaded',()=>{renderPosts();renderCharts();});
 })();
